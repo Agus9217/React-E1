@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react"
 
-function App() {
+export const App = () => {
+
+  const [ newTaskName, setNewTaskName ] = useState()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    localStorage.setItem('Task', newTaskName)
+    setNewTaskName('')
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <form onSubmit = { handleSubmit }>
+        <input  
+          onChange = { (e) => setNewTaskName(e.target.value) }  
+          type='text'
+          value={newTaskName} 
+          placeholder='Enter a news task'
+        />
+
+
+        <button>Save Task Name</button>
+      </form>
     </div>
-  );
+  )
 }
 
-export default App;
